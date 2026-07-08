@@ -1,0 +1,82 @@
+# ==========================================
+# OS
+# ==========================================
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ==========================================
+# IDE
+# ==========================================
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ==========================================
+# Logs
+# ==========================================
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+bun-debug.log*
+
+# ==========================================
+# CLIENT (Vue + Vite)
+# ==========================================
+client/node_modules/
+client/dist/
+client/.vite/
+client/coverage/
+
+# Environment
+client/.env
+client/.env.*
+!client/.env.example
+
+# ==========================================
+# SERVER (Python)
+# ==========================================
+server/.venv/
+server/venv/
+server/env/
+
+server/__pycache__/
+server/**/*.pyc
+server/**/*.pyo
+server/**/*.pyd
+server/.pytest_cache/
+server/.mypy_cache/
+server/.ruff_cache/
+server/.coverage
+server/htmlcov/
+
+# Environment
+server/.env
+server/.env.*
+!server/.env.example
+
+# ==========================================
+# Python
+# ==========================================
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+pip-wheel-metadata/
+
+# ==========================================
+# Temporary
+# ==========================================
+.cache/
+tmp/
+temp/
+
+# ==========================================
+# Git
+# ==========================================
+*.orig
