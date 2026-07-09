@@ -5,6 +5,27 @@ import axios from 'axios'
 
 const link = ref('')
 const loading = ref(false)
+const shortLink = ref('')
+
+const handleSubmit = async () => {
+  const cleanLink = link.value.trim().replace(/^https?:\/\//, '')
+  if (!cleanLink) {
+    alert(cleanLink)
+    return
+  }
+  
+  loading.value = true
+  try {
+    const response = await axios.post('http://localhost:8000/generate', { url: cleanLink })
+    
+    shortLink.value = 'https://civacel.io/' + response.data.slug
+    link.value = ''
+  } catch (error) {
+    console.error(error)
+  } finally {
+    loading.value = false
+  }
+}
 
 </script>
 
@@ -20,8 +41,8 @@ const loading = ref(false)
   <div class="flex flex-row lg:w-240 sm:w-3/4 mx-auto h-16 border mt-10 items-center pl-5">
     <LinkIcon size="24"/>
     <input type="text" placeholder="Вставьте длинную ссылку" v-model="link" class="p-5 w-full focus:outline-none font-mono font-medium text-sm placeholder:text-slate-600">
-    <button class="bg-black px-10 h-full uppercase text-white font-mono" @click="loading = !loading">
-      <LoaderCircleIcon v-if="loading" size="20" class="animate-spin inline mx-6" />
+    <button class="bg-black w-48 h-full uppercase text-white font-mono" @click="handleSubmit">
+      <LoaderCircleIcon v-if="loading" size="20" class="animate-spin inline" />
       <span v-else>создать</span>
     </button>
   </div>
@@ -31,5 +52,9 @@ const loading = ref(false)
     <span class="ml-4 font-mono text-sm font-semibold text-black uppercase tracking-wider whitespace-nowrap">дополнительные настройки</span>
     <ChevronDownIcon size="16" class="mx-4" />
     <div class="grow border-t"></div>
+  </div>
+
+  <div v-if="shortLink" class="bg-green-300/50 text-white font-medium font-mono">
+    <span>{{ shortLink }}</span>
   </div>
 </template>

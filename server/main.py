@@ -36,10 +36,7 @@ async def gen_short_url(url: str = Body(embed=True)):
 
   return JSONResponse(status_code=201,
     content={
-      'data': {
-        'id': link_id,
-        'message': short_slug  
-      }
+      'slug': short_slug  
     }
   )
 
