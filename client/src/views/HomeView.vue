@@ -5,8 +5,9 @@ import axios from 'axios'
 
 const link = ref('')
 const loading = ref(false)
-const shortLink = ref('')
+const shortSlug = ref('')
 const copied = ref(false)
+const openSettings = ref(false)
 
 const handleSubmit = async () => {
   const cleanLink = link.value.trim().replace(/^https?:\/\//, '')
@@ -19,7 +20,7 @@ const handleSubmit = async () => {
   try {
     const response = await axios.post('http://localhost:8000/generate', { url: cleanLink })
     
-    shortLink.value = 'https://civacel.io/' + response.data.slug
+    shortSlug.value = response.data.slug
     link.value = ''
   } catch (error) {
     console.error(error)
@@ -66,23 +67,49 @@ const copyUrl = async (text) => {
 
   <div class="flex items-center justify-center lg:w-240 sm:w-3/4 mx-auto my-10">
     <div class="grow border-t"></div>
-    <span class="ml-4 font-mono text-sm font-semibold text-black uppercase tracking-wider whitespace-nowrap">дополнительные настройки</span>
-    <ChevronDownIcon size="16" class="mx-4" />
+    <button @click="openSettings = !openSettings" class="flex flex-row">
+      <span class="ml-4 font-mono text-sm font-semibold text-black uppercase tracking-wider whitespace-nowrap">дополнительные настройки</span>
+      <ChevronDownIcon size="16" class="mx-4" />
+    </button>
     <div class="grow border-t"></div>
   </div>
 
-  <div class="flex flex-row lg:w-240 sm:w-3/4 mx-auto h-16 border mt-10 items-center">
+  <div v-if="openSettings" class="grid grid-cols-2 gap-4 w-240 mx-auto mt-10 p-4 border font-mono">
+    
+    <div class="flex flex-col gap-1">
+      <span class="text-sm font-medium">Пользовательская ссылка 1</span>
+      <input type="text" class="border p-1 focus:outline-none">
+    </div>
+
+    <div class="flex flex-col gap-1">
+      <span class="text-sm font-medium">Пользовательская ссылка 2</span>
+      <input type="text" class="border p-1 focus:outline-none">
+    </div>
+
+    <div class="flex flex-col gap-1">
+      <span class="text-sm font-medium">Пользовательская ссылка 3</span>
+      <input type="text" class="border p-1 focus:outline-none">
+    </div>
+
+    <div class="flex flex-col gap-1">
+      <span class="text-sm font-medium">Пользовательская ссылка 4</span>
+      <input type="text" class="border py-3.5 px-3.5 text-xs focus:outline-none">
+    </div>
+
+  </div>
+
+  <div v-if="shortSlug" class="flex flex-row lg:w-240 sm:w-3/4 mx-auto h-16 border mt-10 items-center">
     <div class="flex cursor-pointer justify-center items-center h-full px-4.5 border-r transition-all duration-300 hover:bg-black hover:text-white">
       <QrCodeIcon :stroke-width="1.3" class="w-6 h-6" />
     </div>
     
-    <span class="p-5 w-full focus:outline-none font-mono font-medium text-sm placeholder:text-slate-600">civacel.io/shorturl</span>
+    <span class="p-5 w-full focus:outline-none font-mono font-medium text-sm placeholder:text-slate-600">civacel.io/{{ shortSlug }}</span>
     
     <button v-if="copied" class="w-48 border-l border-black h-full uppercase text-black font-mono" :disabled="copied">
       <span>скопировано</span>
     </button>
 
-    <button v-else class="w-48 border-l border-black cursor-pointer h-full uppercase text-black font-mono hover:bg-black hover:text-white transition-all duration-300" @click="copyUrl('https://civacel.io/shorturl')">
+    <button v-else class="w-48 border-l border-black cursor-pointer h-full uppercase text-black font-mono hover:bg-black hover:text-white transition-all duration-300" @click="copyUrl(`https://civacel.io/${shortSlug}`)">
       <span>копировать</span>
     </button>
   </div>
