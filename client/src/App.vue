@@ -11,7 +11,7 @@ const links = [
 </script>
 
 <template>
-  <div class="flex flex-col min-h-screen">
+  <div class="flex flex-col min-h-screen selection:bg-black selection:text-white">
     <header class="pt-5 px-10 border-b border-slate-200 flex flex-row justify-between items-end">
       <span class="font-mono font-semibold tracking-tight text-lg text-slate-900 pb-4">
         url.shorten()

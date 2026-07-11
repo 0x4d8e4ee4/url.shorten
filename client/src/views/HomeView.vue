@@ -76,26 +76,29 @@ const copyUrl = async (text) => {
     <div class="grow border-t-2"></div>
   </div>
 
-  <div v-if="openSettings" class="grid grid-cols-2 gap-4 w-240 mx-auto my-10 p-4 border-2 font-mono shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+  <div v-if="openSettings" class="grid grid-cols-2 gap-7 w-240 mx-auto my-10 p-10 border-2 font-mono shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
     
     <div class="flex flex-col gap-1">
-      <span class="text-sm font-medium">Пользовательская ссылка 1</span>
-      <input type="text" class="border-2 p-1 focus:outline-none">
+      <span class="font-medium text-sm">Пользовательская ссылка</span>
+      <div class="flex flex-row items-center border-2">
+        <span class="inline-block pl-4 py-3.5 font-medium text-sm">civacel.io/</span>
+        <input type="text" class="font-medium h-full text-sm focus:outline-none placeholder:text-slate-600" placeholder="shortslug">
+      </div>
     </div>
 
     <div class="flex flex-col gap-1">
-      <span class="text-sm font-medium">Пользовательская ссылка 2</span>
-      <input type="text" class="border-2 p-1 focus:outline-none">
+      <span class="font-medium text-sm">Срок действия</span>
+      <input type="text" class="border-2 font-medium py-3.5 px-4 text-sm focus:outline-none placeholder:text-slate-600" placeholder="Без срока действия">
     </div>
 
     <div class="flex flex-col gap-1">
-      <span class="text-sm font-medium">Пользовательская ссылка 3</span>
-      <input type="text" class="border-2 p-1 focus:outline-none">
+      <span class="font-medium text-sm">Защита паролем</span>
+      <input type="password" class="border-2 font-medium py-3.5 px-4 text-sm focus:outline-none placeholder:text-slate-600" placeholder="Введите пароль">
     </div>
 
     <div class="flex flex-col gap-1">
-      <span class="text-sm font-medium">Пользовательская ссылка 4</span>
-      <input type="text" class="border-2 py-3.5 px-3.5 text-xs focus:outline-none">
+      <span class="font-medium text-sm">Заметки</span>
+      <input type="text" class="border-2 font-medium py-3.5 px-4 text-sm focus:outline-none placeholder:text-slate-600" placeholder="Введите ссылку">
     </div>
 
   </div>
@@ -116,7 +119,7 @@ const copyUrl = async (text) => {
           <img 
             :src="`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://civacel.io/${shortSlug}`" 
             alt="QR Code" 
-            class="w-[150px] h-[150px] block filter grayscale contract-125"
+            class="w-37.5 h-37.5 block filter grayscale contract-125"
           />
         </div>
         <p class="mt-7 text-xs text-center text-zinc-500 selection:bg-black selection:text-white">
